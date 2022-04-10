@@ -1,0 +1,97 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8-offset-lg-2">
+           <div class="card bg-warning">
+               <div class="card-body text-center">
+                    <h2 style="font-size: 40px; font-weight: 700;">Tarjetas De Credito</h2>
+               </div>
+           </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-6">
+             <div class="card">
+                 <div class="card-body text-center">
+                     <h4>{{ CambioNombre | titlecase }} Tarjeta</h4>
+
+                     <form [formGroup]="forms" (ngSubmit)="AddCard()">
+                        <div class="input-group input-group-lg mt-4 mb-3">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-user-tie" [class.green-color-icon]="this.forms.get('name')?.valid" 
+                                                                [class.red-color-icon]="this.forms.get('name')?.invalid && this.forms.get('name')?.touched">
+                                </i>
+                            </span>
+                            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+                          </div>
+                          <div class="input-group input-group-lg mt-4 mb-3">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-credit-card" [class.green-color-icon]="this.forms.get('cardNumber')?.valid"
+                                                                   [class.red-color-icon]="this.forms.get('cardNumber')?.invalid && this.forms.get('cardNumber')?.touched"
+                                                                   >
+
+                                </i>
+                            </span>
+                            <input formControlName="cardNumber" type="text" class="form-control" placeholder="Tarjeta de credito" maxlength="16">
+                          </div>
+
+                          <div class="row mb-1">
+                              <div class="col-lg-7">
+                                <div class="input-group input-group-lg mt-4 mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-calendar-days" [class.green-color-icon]="this.forms.get('fecha')?.valid"
+                                                                             [class.red-color-icon]="this.forms.get('fecha')?.invalid && this.forms.get('fecha')?.touched">
+
+                                        </i>
+                                    </span>
+                                    <input formControlName="fecha" type="text" class="form-control" placeholder="MM/YY" maxlength="5">
+                                  </div> 
+                              </div>
+                              <div class="col-lg-5">
+                                <div class="input-group input-group-lg mt-4 mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-lock" [class.green-color-icon]="this.forms.get('cvv')?.valid"
+                                                                    [class.red-color-icon]="this.forms.get('cvv')?.invalid && this.forms.get('cvv')?.touched">
+
+                                        </i>
+                                    </span>
+                                    <input formControlName="cvv" type="password" class="form-control" placeholder="CVV" maxlength="3">
+                                  </div> 
+                              </div>
+                          </div>
+                          <div class="d-grid gap-2">
+                            <button [disabled]="this.forms.invalid" type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                          </div>
+                
+                           
+
+                     </form>
+
+                 </div>
+             </div> 
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4>Lista De Tarjetas De Credito</h4>
+                    <table class="table mt-4">
+                        <tbody>
+                            <tr *ngFor="let tarjetas of listcard">
+                                <td> {{ tarjetas.name }} </td>
+                                <td> {{ tarjetas.cardNumber }}  </td>
+                                <td> {{ tarjetas.fecha }} </td>
+                                <td> {{ tarjetas.cvv }} </td>
+                                <td class="icon-edit-elim">
+                                    <i (click)="EditCard(tarjetas)" class="fa-solid fa-file-pen text-info"></i>
+                                </td>
+                                <td (click)="DeleteCard(tarjetas.id)" class="icon-edit-elim">
+                                    <i class="fa-solid fa-trash text-danger"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div> 
