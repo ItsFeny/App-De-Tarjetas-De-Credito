@@ -1,9 +1,10 @@
 
-/* Cambio de cursor de los iconos en la lista de tarjetas*/
+/* Cambio de cursor de los iconos en la lista de tarjetas */
 .icon-edit-elim
 {
     cursor: pointer;
 }
+
 
 /* Color de la validaciones */
 .green-color-icon

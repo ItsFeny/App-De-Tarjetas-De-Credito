@@ -11,10 +11,16 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class TarjetaCreditoComponent implements OnInit {
 
+  
   //arreglo para crear las listas de las tarjetas de credito eh interpolarlo en el tr
   listcard: any[] = [];
+
+  //variable para cambiar el nombre de agregar a editar cuando esta editando mediante el id
   CambioNombre = 'agregar';
+
+  //identificador de si esta editando o no mediante el valor 0 y 1
   id: number | undefined;
+
 
 
   //agregar como un id a los campos mediante las variables con form group 
@@ -37,6 +43,9 @@ export class TarjetaCreditoComponent implements OnInit {
     this.ObtenerTarjeta();
     
   }
+
+
+
 
   //metodo para obtener los datos de la api y hacer que la variable lista de tarjeta ejecute esos datos
   ObtenerTarjeta()
@@ -64,6 +73,9 @@ export class TarjetaCreditoComponent implements OnInit {
       cvv: this.forms.get('cvv')?.value
     }
     
+
+
+    //Condicional para saber si esta editando o no mediante la variable id
     if(this.id == undefined)
     {
        //Agregamos la tarjeta
@@ -86,12 +98,12 @@ export class TarjetaCreditoComponent implements OnInit {
       });
    }
 
-    else
+ else
     {
        card.id = this.id;
        
-       //Editamos la tarjeta
-       this._CardServices.UpdateCard(this.id, card).subscribe(data => {
+         //Editamos la tarjeta
+         this._CardServices.UpdateCard(this.id, card).subscribe(data => {
          this.forms.reset();
          this.CambioNombre = "agregar";
          this.id = undefined;
@@ -100,13 +112,11 @@ export class TarjetaCreditoComponent implements OnInit {
        }, error =>
        {
          console.log(error);
-       })
+       })}
     }
-    
-}
 
 
-
+  //Eliminar Tarjeta de credito
   DeleteCard(id: number)
   {
     this._CardServices.DeleteCard(id).subscribe(data => {
@@ -117,8 +127,11 @@ export class TarjetaCreditoComponent implements OnInit {
     })
 }
 
- EditCard(tarjeta: any)
- {
+
+ 
+   //Editar tarjeta de credito
+   EditCard(tarjeta: any)
+{
    this.CambioNombre = "editar";
    this.id = tarjeta.id;
 
@@ -127,8 +140,7 @@ export class TarjetaCreditoComponent implements OnInit {
      cardNumber: tarjeta.cardNumber,
      fecha: tarjeta.fecha,
      cvv: tarjeta.cvv
-   })
- }
+   })}
 
 }
 
